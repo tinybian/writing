@@ -1,12 +1,12 @@
 package sort;
 
 /**  
- * ¿ìËÙÅÅĞò<br/>  
+ * å¿«é€Ÿæ’åº<br/>  
  * <ul>  
- * <li>´ÓÊıÁĞÖĞÌô³öÒ»¸öÔªËØ£¬³ÆÎª¡°»ù×¼¡±</li>  
- * <li>ÖØĞÂÅÅĞòÊıÁĞ£¬ËùÓĞÔªËØ±È»ù×¼ÖµĞ¡µÄ°Ú·ÅÔÚ»ù×¼Ç°Ãæ£¬ËùÓĞÔªËØ±È»ù×¼Öµ´óµÄ°ÚÔÚ»ù×¼µÄºóÃæ£¨ÏàÍ¬µÄÊı¿ÉÒÔµ½ÈÎÒ»±ß£©¡£ÔÚÕâ¸ö·Ö¸îÖ®ºó£¬  
- * ¸Ã»ù×¼ÊÇËüµÄ×îºóÎ»ÖÃ¡£Õâ¸ö³ÆÎª·Ö¸î£¨partition£©²Ù×÷¡£</li>  
- * <li>µİ¹éµØ°ÑĞ¡ÓÚ»ù×¼ÖµÔªËØµÄ×ÓÊıÁĞºÍ´óÓÚ»ù×¼ÖµÔªËØµÄ×ÓÊıÁĞÅÅĞò¡£</li>  
+ * <li>ä»æ•°åˆ—ä¸­æŒ‘å‡ºä¸€ä¸ªå…ƒç´ ï¼Œç§°ä¸ºâ€œåŸºå‡†â€</li>  
+ * <li>é‡æ–°æ’åºæ•°åˆ—ï¼Œæ‰€æœ‰å…ƒç´ æ¯”åŸºå‡†å€¼å°çš„æ‘†æ”¾åœ¨åŸºå‡†å‰é¢ï¼Œæ‰€æœ‰å…ƒç´ æ¯”åŸºå‡†å€¼å¤§çš„æ‘†åœ¨åŸºå‡†çš„åé¢ï¼ˆç›¸åŒçš„æ•°å¯ä»¥åˆ°ä»»ä¸€è¾¹ï¼‰ã€‚åœ¨è¿™ä¸ªåˆ†å‰²ä¹‹åï¼Œ  
+ * è¯¥åŸºå‡†æ˜¯å®ƒçš„æœ€åä½ç½®ã€‚è¿™ä¸ªç§°ä¸ºåˆ†å‰²ï¼ˆpartitionï¼‰æ“ä½œã€‚</li>  
+ * <li>é€’å½’åœ°æŠŠå°äºåŸºå‡†å€¼å…ƒç´ çš„å­æ•°åˆ—å’Œå¤§äºåŸºå‡†å€¼å…ƒç´ çš„å­æ•°åˆ—æ’åºã€‚</li>  
  * </ul>  
  * 
  */
@@ -16,24 +16,62 @@ class QuickSort{
 		if(start<end)
 		{
 			int middle = partition(a, start, end);
-			quickSort(a, start, middle-1);//²»ÄÜ½«Middleµİ¹é½øÈ¥ ·ñÔòµ±·Ö¸îÊ§°ÜÊ± ¿ÉÄÜËÀÑ­»·
+			quickSort(a, start, middle-1);//ä¸èƒ½å°†Middleé€’å½’è¿›å» å¦åˆ™å½“åˆ†å‰²å¤±è´¥æ—¶ å¯èƒ½æ­»å¾ªç¯
 			quickSort(a, middle+1, end);
 		}
 	} 
 	private int partition(float[] a, int start, int end)
 	{
-		float temp = a[start];//È¡³öÖĞÖá
+		float temp = a[start];//å–å‡ºä¸­è½´
 		while(start<end)
 		{
-			while(start<end && a[end]>=temp)//´ÓÓÒÏò×óÕÒµ½±ÈÖĞÖáĞ¡µÄ
+			while(start<end && a[end]>=temp)//ä»å³å‘å·¦æ‰¾åˆ°æ¯”ä¸­è½´å°çš„
 				end--;
-			a[start]=a[end];//¸³Öµ¸ø×ó²àÔªËØ
-			while(start<end && a[start]<=temp)//´Ó×óÏòÓÒÕÒµ½±ÈÖĞÖá´óµÄ
+			a[start]=a[end];//èµ‹å€¼ç»™å·¦ä¾§å…ƒç´ 
+			while(start<end && a[start]<=temp)//ä»å·¦å‘å³æ‰¾åˆ°æ¯”ä¸­è½´å¤§çš„
 				start++;
-			a[end]=a[start];//¸³Öµ¸øÓÒ²àÔªËØ
-		}//Ö±µ½start==end
-		a[start]=temp;//½«ÖĞÖá¸³Öµ¸øµ±Ç°Î»ÖÃ
+			a[end]=a[start];//èµ‹å€¼ç»™å³ä¾§å…ƒç´ 
+		}//ç›´åˆ°start==end
+		a[start]=temp;//å°†ä¸­è½´èµ‹å€¼ç»™å½“å‰ä½ç½®
 		return start;
 	}
+	
+	private int improvePartition(int[] array, int start, int end) {
+            int mid = getMin3(array, start, start+(end - start)/2, end);//è·å–å¼€å¤´ï¼Œç»“å°¾ï¼Œä¸­é—´ä¸‰ä¸ªå…ƒç´ çš„ä¸­ä½æ•°çš„ä¸‹æ ‡
+            swap(array, start, mid); // å°†è¿™ä¸ªä¸­ä½æ•°ä¸å¼€å¤´å…ƒç´ äº¤æ¢ï¼Œä»¥ä¾¿ç»§ç»­ä½¿ç”¨ä¸Šè¿°ç®—æ³•ã€‚
+            int temp = array[start];
+            while(start < end) {
+                while(start < end && array[end] >= temp)
+                    end--;
+                array[start] = array[end];
+                while(start < end && array[start] <= temp)
+                    start++;
+                array[end] = array[start];
+            }
+            array[start] = temp;
+            return start;
+        }
+
+	// è·å–3ä¸ªå…ƒç´ çš„ä¸­ä½æ•°ä¸‹æ ‡
+        private int getMin3(int[] array, int i, int j, int k) {
+            int min = array[i], max = array[i];
+            if( array[j] < min )
+                min = array[j];
+            else
+                max = array[j];
+
+            if( array[k] < min )
+                min = array[k];
+            else if( array[k] > max )
+                max = array[k];
+
+            int mid = array[i] + array[j] + array[k] - max - min; // æ‰¾å‡ºä¸­ä½æ•°çš„å¤§å°
+            if (array[i] == mid)
+                return i;
+            if (array[j] == mid)
+                return j;
+            else
+                return k;
+        }
 }
 
